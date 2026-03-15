@@ -1,5 +1,6 @@
 
 let allWorks = [];
+const token = localStorage.getItem("token");
 
 async function recupererTravaux() {
     try {
@@ -51,11 +52,9 @@ function creerBoutonTous(container) {
 
 function activerBoutonFiltre(boutonActif) {
     const container = document.querySelector(".filter-container");
-    container
-        .querySelectorAll(".filter-btn")
-        .forEach(function (bouton) {
-            bouton.classList.remove("active");
-        });
+    container.querySelectorAll(".filter-btn").forEach(function (bouton) {
+        bouton.classList.remove("active");
+    });
 
     boutonActif.classList.add("active");
 }
@@ -76,6 +75,47 @@ function creerBoutonCategorie(categorie, container) {
     container.appendChild(bouton);
 }
 
+function allerAuLogin() {
+    window.location.href = "login.html";
+}
+
+function seDeconnecter() {
+    localStorage.removeItem("token");
+    window.location.href = "index.html";
+}
+
+function mettreAJourBoutonConnexion() {
+    const boutonConnexion = document.getElementById("login-btn");
+    if (token) {
+        boutonConnexion.textContent = "logout";
+        boutonConnexion.addEventListener("click", seDeconnecter);
+    } else {
+        boutonConnexion.textContent = "login";
+        boutonConnexion.addEventListener("click", allerAuLogin);
+    }
+}
+
+function mettreAJourAffichageAdmin() {
+    const boutonModifier = document.querySelector(".edit-btn");
+    const containerFiltres = document.querySelector(".filter-container");
+    if (token) {
+        boutonModifier.style.display = "block";
+        containerFiltres.style.display = "none";
+    } else {
+        boutonModifier.style.display = "none";
+        containerFiltres.style.display = "block";
+    }
+}
+
+function ajouterBarreAdmin() {
+    const barreAdmin = document.createElement("div");
+    barreAdmin.classList.add("admin-bar");
+    barreAdmin.innerHTML =
+        '<img src="./assets/icons/edit-icon.svg" alt="Modifier">' +
+        "<span>Mode edition</span>";
+    document.body.prepend(barreAdmin);
+}
+
 async function lancerSite() {
     await recupererTravaux();
     const categories = await recupererCategories();
@@ -86,10 +126,13 @@ async function lancerSite() {
     categories.forEach(function (categorie) {
         creerBoutonCategorie(categorie, containerFiltres);
     });
+
+    mettreAJourBoutonConnexion();
+    mettreAJourAffichageAdmin();
+    if (token) {
+        document.body.classList.add("admin");
+        ajouterBarreAdmin();
+    }
 }
 
 lancerSite();
-
-
-
-
