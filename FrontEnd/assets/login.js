@@ -2,25 +2,20 @@
 // Form submit
 const form = document.getElementById("login-form");
 const loginError = document.getElementById("login-error");
-async function submitContactForm(event) {
+async function seConnecter(event) {
     event.preventDefault();
 
-    const email = document.getElementById("email").value;// valuepour avoir l'utilisatue ce qu'il a tapé .
+    const email = document.getElementById("email").value;// ce que l'utilisateur a tapé
     const password = document.getElementById("password").value;
 
-    const loginData = {
-        email: email,
-        password: password
-    };
 
     const response = await fetch('http://localhost:5678/api/users/login', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(loginData)
+        body: JSON.stringify({email:email, password:password})
     });
-
     if (response.ok) {
         loginError.textContent = "";
         const data = await response.json();
@@ -31,4 +26,4 @@ async function submitContactForm(event) {
     }
 }
 
-form.addEventListener("submit", submitContactForm);
+form.addEventListener("submit", seConnecter);

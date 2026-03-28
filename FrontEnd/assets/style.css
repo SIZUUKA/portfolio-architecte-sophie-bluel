@@ -94,6 +94,12 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
+h3 {
+	text-align: center;
+    font-size: 26px;
+}
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -146,7 +152,6 @@ nav li a {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
 .gallery {
 	width: 100%;
@@ -245,8 +250,8 @@ button {
 .filter-btn {
 	padding-top: 9px;
 	padding-bottom: 9px;
-	padding-inline: 8px;
-
+	padding-left: 8px;
+    padding-right: 8px;
 	color: #1D6154;
 	border: solid 1px #1D6154;
 	border-radius: 50vh;
@@ -254,16 +259,12 @@ button {
 	font-weight: 700;
 
 
-	&.active {
-		background-color: #1D6154;
-		color: white;
 	}
-}
 
-/* .filter-btn.active {
-	background-color: #1D6154;
-	color: white;
-} */
+.filter-btn.active {
+    background-color: #1D6154;
+    color: white;
+}
 
 figcaption {
 	font-family: 'Work Sans';
@@ -281,6 +282,9 @@ figcaption {
 	color: #000000;
 	cursor: pointer;
 	display: none;
+
+	justify-content: center;
+	align-items: center;
 }
 
 body.admin {
@@ -301,4 +305,182 @@ body.admin {
 	justify-content: center;
 	align-items: center;
 	gap: 10px;
+}
+
+.portfolio-header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 1em;
+}
+/* Modale */
+.modal {
+	display: none;
+	position: fixed;
+	top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;	z-index: 100;
+	align-items: center;
+	justify-content: center;
+}
+.modal.is-open {
+	display: flex;
+}
+.modal-overlay {
+	position: absolute;
+	top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;	background: rgba(0, 0, 0, 0.4);
+}
+.modal-box {
+	position: relative;
+	background: white;
+	border-radius: 10px;
+	padding-left: 105px;
+    padding-right: 105px;	
+	padding-top: 60px;
+	padding-bottom: 45px;
+    max-width: 420px;
+	width: 90%;
+	max-height: 90vh;
+	overflow: auto;
+}
+.modal-close {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	font-size: 24px;
+	line-height: 1;
+	cursor: pointer;
+	background: none;
+	border: none;
+}
+.modal-close img {
+	width: 12px;
+	height: 12px;
+  }
+.modal-view h2 {
+	text-align: center;
+	margin-bottom: 30px;
+	font-size: 26px;
+}
+.modal-gallery-view hr {
+	border: none;
+	border-top: 1px solid #b3b3b3;
+	margin-top: 67px;
+	margin-bottom: 38px;
+}
+.modal-gallery {
+	display: grid;
+	margin-top: 46px;
+	grid-template-columns: repeat(5, 1fr);
+	row-gap: 26px;
+    column-gap: 10px;
+}
+.modal-gallery .modal-work {
+	position: relative;
+	max-width: 100%;
+    height: 102px;
+}
+.modal-gallery .modal-work>img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.modal-back img {
+	width: 21px;
+	height: 21px;
+  }
+.modal-gallery .modal-delete {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 17px;
+	height: 17px;
+	background: #000;
+	color: white;
+	border: none;
+	border-radius: 2px;
+	cursor: pointer;
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.btn-add-photo {
+	display: block;
+	margin: 0 auto;
+	padding: 10px 24px;
+	background: #1D6154;
+	color: white;
+	border: none;
+	border-radius: 50vw;
+	cursor: pointer;
+	font-weight: 600;
+}
+.modal-form-view {
+	position: relative;
+}
+.modal-back {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: none;
+	border: none;
+	font-size: 20px;
+	cursor: pointer;
+}
+.modal-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.upload-zone {
+	background: #e8f1f6;
+	border-radius: 4px;
+	padding: 30px;
+	text-align: center;
+}
+.upload-icon {
+	font-size: 48px;
+	display: block;
+	margin-bottom: 10px;
+}
+.btn-upload {
+	display: block;
+	margin: 0 auto 8px;
+	padding: 10px 20px;
+	background: #cbd6dc;
+	border-radius: 100vw;
+	border: none;
+	cursor: pointer;
+}
+.upload-zone p {
+	font-size: 12px;
+	color: #666;
+}
+.modal-form input,
+.modal-form select {
+	padding: 10px;
+	border: none;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.modal-image{
+	display: none;
+}
+.btn-validate {
+	margin-top: 20px;
+	padding: 12px;
+	background: #a7a7a7;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.preview-image {
+	max-width: 100%;
+	max-height: 250px;
 }
