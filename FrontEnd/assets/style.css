@@ -422,6 +422,8 @@ body.admin {
 }
 .modal-form-view {
 	position: relative;
+	display: none;
+
 }
 .modal-back {
 	position: absolute;

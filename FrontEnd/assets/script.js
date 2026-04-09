@@ -46,7 +46,6 @@ function afficherTravaux(travaux) {
 
 
 
-// Je crée le bouton "Tous" qui affiche tous les travaux
 function creerBoutonTous(container) {
     const bouton = document.createElement('button');
     bouton.textContent = 'Tous';
@@ -60,7 +59,6 @@ function creerBoutonTous(container) {
     container.appendChild(bouton);
 }
 
-// J'active le bouton cliqué et je désactive les autres
 function activerBouton(boutonActif) {
     const container = document.querySelector('.filter-container');
 
@@ -71,7 +69,6 @@ function activerBouton(boutonActif) {
     boutonActif.classList.add('active');
 }
 
-// Je crée un bouton pour chaque catégorie
 function creerBoutonCategorie(categorie, container) {
     const bouton = document.createElement('button');
     bouton.textContent = categorie.name;
@@ -90,18 +87,15 @@ function creerBoutonCategorie(categorie, container) {
 
 
 
-// Je redirige vers la page de connexion
 function allerAuLogin() {
     window.location.href = 'login.html';
 }
 
-// Je déconnecte l'utilisateur
 function seDeconnecter() {
     localStorage.removeItem('token');
     window.location.href = 'index.html';
 }
 
-// Je mets à jour le bouton login/logout selon si on est connecté ou pas
 function mettreAJourBoutonConnexion() {
     const boutonConnexion = document.getElementById('login-btn');
 
@@ -114,7 +108,6 @@ function mettreAJourBoutonConnexion() {
     }
 }
 
-// Je montre ou je cache les boutons selon si on est connecté ou pas
 function mettreAJourAffichage() {
     const boutonModifier = document.querySelector('.edit-btn');
     const containerFiltres = document.querySelector('.filter-container');
@@ -128,7 +121,6 @@ function mettreAJourAffichage() {
     }
 }
 
-// J'ajoute la barre noire "mode édition" en haut de la page
 function ajouterBarreAdmin() {
     const barreAdmin = document.createElement('div');
     barreAdmin.classList.add('admin-bar');
@@ -153,7 +145,6 @@ const inputTitre = document.getElementById('modal-title');
 const selectCategorie = document.getElementById('modal-category');
 const messageErreur = document.querySelector('.modal-error');
 
-// J'ouvre la modal
 function ouvrirModal() {
     if (!token) return;
 
@@ -171,12 +162,10 @@ function ouvrirModal() {
     modal.classList.add('is-open');
 }
 
-// Je ferme la modal
 function fermerModal() {
     modal.classList.remove('is-open');
 }
 
-// Je remplis la galerie dans la modal avec tous les travaux
 function remplirGalerieModal() {
     galerieModal.innerHTML = '';
 
@@ -199,7 +188,6 @@ function remplirGalerieModal() {
     });
 }
 
-// Je remplis le menu déroulant des catégories dans le formulaire
 function remplirSelectCategories() {
     if (!selectCategorie) return;
 
@@ -218,19 +206,18 @@ function remplirSelectCategories() {
     });
 }
 
-// Je passe à la vue formulaire
 function afficherFormulaireModal() {
     vueGalerie.style.display = 'none';
     vueFormulaire.style.display = 'block';
+    document.querySelector('.preview-image').src = './assets/icons/image-placeholder.svg';
+
 }
 
-// Je reviens à la vue galerie
 function afficherGalerieModal() {
     vueGalerie.style.display = 'block';
     vueFormulaire.style.display = 'none';
 }
 
-// Je montre un aperçu de l'image choisie avant l'envoi
 function apercuImage(event) {
     const image = event.target.files[0];
 
@@ -240,7 +227,6 @@ function apercuImage(event) {
     }
 }
 
-// J'envoie le nouveau travail à l'API
 async function envoyerFormulaire(event) {
     event.preventDefault();
 
@@ -272,6 +258,9 @@ async function envoyerFormulaire(event) {
             remplirGalerieModal();
             formulaireModal.reset();
             messageErreur.textContent = '';
+            document.querySelector('.preview-image').src = './assets/icons/image-placeholder.svg';
+            afficherGalerieModal();
+
         } else {
             messageErreur.textContent = "Erreur lors de l'envoi.";
         }
@@ -281,7 +270,6 @@ async function envoyerFormulaire(event) {
     }
 }
 
-// Je supprime un travail
 async function supprimerTravail(id) {
     try {
         const reponse = await fetch('http://localhost:5678/api/works/' + id, {
@@ -303,7 +291,6 @@ async function supprimerTravail(id) {
     }
 }
 
-// J'active les boutons de la modal seulement si on est connecté
 if (token) {
     document.querySelector('.edit-btn').addEventListener('click', ouvrirModal);
     boutonFermer.addEventListener('click', fermerModal);
