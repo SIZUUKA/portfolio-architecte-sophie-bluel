@@ -1,4 +1,4 @@
-//variable globeau
+//variables globales
 let allWorks = [];
 let allCategories = [];
 const token = localStorage.getItem('token');
@@ -227,6 +227,43 @@ function apercuImage(event) {
     }
 }
 
+function formulaireEstValide() {
+    const image = inputImage.files[0];
+    const titre = inputTitre.value.trim();
+    const categorieId = selectCategorie.value;
+
+    const imageSize = image?.size ?? 0
+
+    if(imageSize === 0)
+        return false;
+
+    if(titre.length === 0)
+        return false;
+
+    if(categorieId <= 0)
+        return false;
+
+    return true
+}
+
+function verifierFormulaire() {
+    const boutonValider = document.querySelector('.btn-validate');
+    if (formulaireEstValide()) {
+        boutonValider.disabled = false;
+    } else {
+        boutonValider.disabled = true;
+    }   
+}
+
+function initialiserFormulaire() {
+    remplirSelectCategories();
+
+    inputImage.addEventListener('change', verifierFormulaire);
+    inputTitre.addEventListener('input', verifierFormulaire);
+    selectCategorie.addEventListener('change', verifierFormulaire);
+}
+
+
 async function envoyerFormulaire(event) {
     event.preventDefault();
 
@@ -259,6 +296,7 @@ async function envoyerFormulaire(event) {
             formulaireModal.reset();
             messageErreur.textContent = '';
             document.querySelector('.preview-image').src = './assets/icons/image-placeholder.svg';
+            verifierFormulaire();
             afficherGalerieModal();
 
         } else {
@@ -318,10 +356,11 @@ async function lancerSite() {
     mettreAJourBoutonConnexion();
     mettreAJourAffichage();
 
+
     if (token) {
         document.body.classList.add('admin');
         ajouterBarreAdmin();
-        remplirSelectCategories();
+        initialiserFormulaire();
     }
 }
 

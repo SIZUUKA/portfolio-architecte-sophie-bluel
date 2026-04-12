@@ -100,6 +100,7 @@ h3 {
     font-size: 26px;
 }
 
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -213,6 +214,10 @@ button[type="submit"], input[type="submit"]{
 	width: 239px;
 	padding-inline: 8px;
 	max-width: 100%;
+
+	&:disabled {
+		background-color: #a7a7a7;
+	}
 }
 
 
@@ -422,8 +427,6 @@ body.admin {
 }
 .modal-form-view {
 	position: relative;
-	display: none;
-
 }
 .modal-back {
 	position: absolute;
